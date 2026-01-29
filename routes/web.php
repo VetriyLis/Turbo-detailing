@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Auth\OrderController;
 
 /*
 | Web Routes
