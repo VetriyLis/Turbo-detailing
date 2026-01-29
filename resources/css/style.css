@@ -1,0 +1,57 @@
+    :root{--bg:#0f0f0f;--card:#ffffff;--muted:#777}
+    *{box-sizing:border-box;font-family:Inter, system-ui, Arial, sans-serif}
+    body{margin:0;background:#111;min-height:100vh;color:#111}
+    .app-bg{background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAYAAAC8...'); /* optional small placeholder */ background-size:cover; background-position:center; filter:brightness(.35); position:fixed; inset:0; z-index:-1}
+
+    .container{max-width:1150px;margin:28px auto;padding:18px}
+    header{display:flex;gap:12px;align-items:center}
+
+    .search{flex:1;display:flex;gap:8px}
+    .search input{flex:1;padding:12px 14px;border-radius:6px;border:1px solid #ccc}
+    .icon-btn{width:44px;height:44px;border-radius:8px;border:1px solid #ccc;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+
+    .filter{position:relative}
+    .filter-panel{position:absolute;top:54px;left:0;background:#0d0d0d;color:#fff;padding:14px;border-radius:6px;border:1px solid rgba(255,255,255,.08);min-width:320px;display:none}
+    .filter-panel.show{display:block}
+    .filter-panel label{display:block;font-size:13px;margin-bottom:6px}
+    .filter-panel input[type=date]{padding:8px;border-radius:6px;border:1px solid #333;background:#fff;color:#000}
+    .filter-panel select{padding:8px;border-radius:6px}
+
+    .account-panel{position:relative}
+    .account-menu{position:absolute;right:0;top:54px;background:#0d0d0d;color:#fff;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,.08);display:none}
+    .account-menu.show{display:block}
+    .btn-logout{display:block;padding:8px 12px;border-radius:6px;background:#ff5757;color:#fff;border:none;cursor:pointer}
+
+    .controls{display:flex;gap:12px;align-items:center;margin:18px 0}
+    .add-btn{padding:10px 14px;border-radius:8px;background:#08a7ff;color:#fff;border:none;cursor:pointer}
+
+    .orders{display:flex;flex-direction:column;gap:18px}
+    .card{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25);display:flex;flex-direction:column;gap:8px}
+    .card .top{display:flex;justify-content:space-between;align-items:flex-start}
+    .meta{font-size:13px;color:#333}
+    .status{font-weight:700}
+    .status.new{color:#00bfff}
+    .status.work{color:#ffbf00}
+    .status.done{color:#2fc14b}
+
+    .thumbs{display:flex;gap:8px;align-items:center;margin-top:10px}
+    .thumb{width:56px;height:40px;background:#eee;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#999;font-size:12px}
+    .badge{padding:6px 8px;border-radius:8px;background:#eee;font-weight:700}
+
+    .card-actions{display:flex;gap:8px;align-items:center;margin-top:8px}
+    .card select{padding:8px;border-radius:6px}
+    .card button{padding:8px 10px;border-radius:6px;border:none;cursor:pointer}
+    .accept{background:#08a7ff;color:#fff}
+    .reject{background:#ddd}
+
+    /* login */
+    .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center}
+    .login{background:#fff;padding:28px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(0,0,0,.4)}
+    .login h2{margin:0 0 12px}
+    .login .field{display:flex;flex-direction:column;margin-bottom:12px}
+    .login input{padding:10px;border-radius:6px;border:1px solid #ccc}
+    .err{color:#b00020}
+
+    footer{color:#aaa;font-size:13px;margin-top:18px}
+
+    @media(max-width:720px){.container{padding:10px}.thumb{width:46px;height:36px}}
