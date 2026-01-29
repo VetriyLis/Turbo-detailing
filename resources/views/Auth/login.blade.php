@@ -11,9 +11,9 @@
       @csrf
 
       <div style="margin-bottom:8px">
-        <label>Email</label>
-        <input type="email" name="email" value="{{ old('email') }}" required autofocus>
-        @error('email') <div style="color:#b00020">{{ $message }}</div> @enderror
+        <label>Login</label>
+        <input type="login" name="login" required autofocus>
+        @error('login') <div style="color:#b00020">{{ $message }}</div> @enderror
       </div>
 
       <div style="margin-bottom:8px">

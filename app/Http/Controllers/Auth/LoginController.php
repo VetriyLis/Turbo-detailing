@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller; // ← ВОТ ЭТА СТРОКА КЛЮЧЕВАЯ
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -22,7 +22,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'login' => ['required', 'login'],
             'password' => ['required'],
         ]);
 
@@ -32,7 +32,7 @@ class LoginController extends Controller
         }
 
         throw ValidationException::withMessages([
-            'email' => 'Неверный логин или пароль',
+            'login' => 'Неверный логин или пароль',
         ]);
     }
 
