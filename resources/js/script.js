@@ -1,4 +1,17 @@
-    // ======= Simple SPA with localStorage persistence =======
+document.addEventListener('DOMContentLoaded', () => {
+  const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  // пример fetch с токеном:
+  fetch('/orders/1/status', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': token
+    },
+    body: JSON.stringify({ status: 'work' })
+  });
+
+
+// ======= Simple SPA with localStorage persistence =======
     const CREDENTIALS = {login:'employee', password:'turbo123'}; // сотрудник: employee / turbo123
     const LS_KEY = 'turbo_orders_v1';
     const LS_USER = 'turbo_user_logged';
@@ -236,3 +249,4 @@
     // initial render
     render();
 
+});

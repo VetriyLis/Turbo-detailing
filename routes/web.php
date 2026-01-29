@@ -1,21 +1,19 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\OrderController;
 
-Route::get('/main', function () {
-    return view('main');
-});
+/*
+| Web Routes
+*/
 
-Route::get('/', function () {
-    return view('log');
-});
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/reg',function () {
-    return view('reg');
-});
-
-
-Route::post('/reg', function () {
-    return view('reg');
+Route::middleware('auth')->group(function () {
+    Route::get('/', [OrderController::class, 'index'])->name('dashboard');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    Route::patch('/orders/{order}/status', [OrderController::class, 'updateStatus']);
 });
