@@ -11,7 +11,7 @@
       @csrf
 
       <div style="margin-bottom:8px">
-        <label>Login</label>
+        <label>Логин</label>
         <input type="login" name="login" required autofocus>
         @error('login') <div style="color:#b00020">{{ $message }}</div> @enderror
       </div>
@@ -20,10 +20,6 @@
         <label>Пароль</label>
         <input type="password" name="password" required>
         @error('password') <div style="color:#b00020">{{ $message }}</div> @enderror
-      </div>
-
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-        <label><input type="checkbox" name="remember"> Запомнить</label>
       </div>
 
       <div>

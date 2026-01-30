@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>@yield('title','Turbo Detailing')</title>
 
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
@@ -42,7 +42,7 @@
 </main>
 
 <script>window.Laravel = { csrfToken: '{{ csrf_token() }}', user: @json(auth()->user()) };</script>
-<script src="{{ asset('js/app.js') }}" defer></script>
+<script src="{{ asset('resources/js/script.js') }}" defer></script>
 @stack('scripts')
 </body>
 </html>
