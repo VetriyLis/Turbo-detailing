@@ -79,33 +79,5 @@
 
 <script>window.Laravel = Object.assign(window.Laravel || {}, { orders: @json($orders) });</script>
 
-@push('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-  document.querySelectorAll('.status-select').forEach(s => {
-    s.addEventListener('change', e => {
-      const id = e.target.dataset.id;
-      const status = e.target.value;
-      fetch(`/orders/${id}/status`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-TOKEN': token
-        },
-        body: JSON.stringify({ status })
-      }).then(r => r.json()).then(() => location.reload());
-    });
-  });
-
-  const accBtn = document.getElementById('account_btn');
-  const accMenu = document.getElementById('account_menu');
-  if (accBtn && accMenu) {
-    accBtn.addEventListener('click', () => accMenu.style.display = accMenu.style.display === 'block' ? 'none' : 'block');
-  }
-});
-</script>
-@endpush
 
 @endsection

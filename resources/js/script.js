@@ -20,13 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-
-  if (btn && menu) {
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('show');
-    });
-  }
-
   // ===== filter modal =====
 const filterBtn = document.getElementById('filter_btn');
 const filterModal = document.getElementById('filter_modal');
