@@ -7,11 +7,6 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    // только авторизованные могут работать с заявками
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     // GET /  (dashboard)
     public function index(Request $request)

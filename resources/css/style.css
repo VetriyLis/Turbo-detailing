@@ -1,57 +1,247 @@
-    :root{--bg:#0f0f0f;--card:#ffffff;--muted:#777}
-    *{box-sizing:border-box;font-family:Inter, system-ui, Arial, sans-serif}
-    body{margin:0;background:#111;min-height:100vh;color:#111}
-    .app-bg{background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAYAAAC8...'); /* optional small placeholder */ background-size:cover; background-position:center; filter:brightness(.35); position:fixed; inset:0; z-index:-1}
+:root{
+  --bg-dark: #0f0f10;
+  --card-bg: #ffffff;
+  --muted: #777;
+  --accent: #08a7ff;
+  --status-new: #00bfff;
+  --status-work: #ffbf00;
+  --status-done: #2fc14b;
+  --glass-border: rgba(0,0,0,.06);
+  --container-width: 1150px;
+}
 
-    .container{max-width:1150px;margin:28px auto;padding:18px}
-    header{display:flex;gap:12px;align-items:center}
+/* Reset-ish */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg,#0b0b0b 0%, #111 100%);
+  color:#222;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
 
-    .search{flex:1;display:flex;gap:8px}
-    .search input{flex:1;padding:12px 14px;border-radius:6px;border:1px solid #ccc}
-    .icon-btn{width:44px;height:44px;border-radius:8px;border:1px solid #ccc;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+/* decorative background image */
+.app-bg{
+  position:fixed;
+  inset:0;
+  background-image: url('/img/bg.jpg');
+  background-size:cover;
+  background-position:center;
+  filter: brightness(.25);
+  z-index: -1;
+}
 
-    .filter{position:relative}
-    .filter-panel{position:absolute;top:54px;left:0;background:#0d0d0d;color:#fff;padding:14px;border-radius:6px;border:1px solid rgba(255,255,255,.08);min-width:320px;display:none}
-    .filter-panel.show{display:block}
-    .filter-panel label{display:block;font-size:13px;margin-bottom:6px}
-    .filter-panel input[type=date]{padding:8px;border-radius:6px;border:1px solid #333;background:#fff;color:#000}
-    .filter-panel select{padding:8px;border-radius:6px}
+/* main container */
+.container{
+  max-width: var(--container-width);
+  margin: 24px auto;
+  padding: 18px;
+}
 
-    .account-panel{position:relative}
-    .account-menu{position:absolute;right:0;top:54px;background:#0d0d0d;color:#fff;padding:8px;border-radius:6px;border:1px solid rgba(255,255,255,.08);display:none}
-    .account-menu.show{display:block}
-    .btn-logout{display:block;padding:8px 12px;border-radius:6px;background:#ff5757;color:#fff;border:none;cursor:pointer}
+/* Header */
+.td-header .container{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.td-left{flex:1}
+.logo{
+  text-decoration:none;
+  color:var(--accent);
+  font-weight:700;
+  font-size:18px;
+  display:inline-block;
+}
 
-    .controls{display:flex;gap:12px;align-items:center;margin:18px 0}
-    .add-btn{padding:10px 14px;border-radius:8px;background:#08a7ff;color:#fff;border:none;cursor:pointer}
+/* Header right area (keeps space for account etc) */
+.td-right{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
 
-    .orders{display:flex;flex-direction:column;gap:18px}
-    .card{background:var(--card);padding:14px;border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.25);display:flex;flex-direction:column;gap:8px}
-    .card .top{display:flex;justify-content:space-between;align-items:flex-start}
-    .meta{font-size:13px;color:#333}
-    .status{font-weight:700}
-    .status.new{color:#00bfff}
-    .status.work{color:#ffbf00}
-    .status.done{color:#2fc14b}
+/* Search input */
+.search-input, .filter-form input[type="text"], .filter-form input[type="date"], input[name="search"]{
+  width:100%;
+  padding:10px 14px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  background:#fff;
+  font-size:14px;
+  color:#111;
+}
 
-    .thumbs{display:flex;gap:8px;align-items:center;margin-top:10px}
-    .thumb{width:56px;height:40px;background:#eee;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#999;font-size:12px}
-    .badge{padding:6px 8px;border-radius:8px;background:#eee;font-weight:700}
+/* Generic icon/button styles */
+.icon-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:8px 10px;
+  background:#fff;
+  border-radius:8px;
+  border:1px solid #d0d0d0;
+  cursor:pointer;
+  font-size:14px;
+  box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
 
-    .card-actions{display:flex;gap:8px;align-items:center;margin-top:8px}
-    .card select{padding:8px;border-radius:6px}
-    .card button{padding:8px 10px;border-radius:6px;border:none;cursor:pointer}
-    .accept{background:#08a7ff;color:#fff}
-    .reject{background:#ddd}
+/* Controls row */
+.controls{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:18px 0;
+}
 
-    /* login */
-    .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center}
-    .login{background:#fff;padding:28px;border-radius:10px;max-width:420px;width:100%;box-shadow:0 8px 30px rgba(0,0,0,.4)}
-    .login h2{margin:0 0 12px}
-    .login .field{display:flex;flex-direction:column;margin-bottom:12px}
-    .login input{padding:10px;border-radius:6px;border:1px solid #ccc}
-    .err{color:#b00020}
+/* Add button */
+.add-btn{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  padding:10px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  box-shadow:0 6px 18px rgba(8,167,255,.12);
+}
 
-    footer{color:#aaa;font-size:13px;margin-top:18px}
+/* Filter form (inline version in dashboard) */
+.filter-form{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.filter-form select, .filter-form input[type="date"], .filter-form input[name="search"]{
+  padding:8px 10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  background:#fff;
+}
 
-    @media(max-width:720px){.container{padding:10px}.thumb{width:46px;height:36px}}
+/* Orders list */
+.orders{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  margin-top:8px;
+}
+
+/* Card */
+.card{
+  background:var(--card-bg);
+  padding:14px;
+  border-radius:10px;
+  box-shadow: 0 8px 26px rgba(0,0,0,.28);
+  border: 1px solid rgba(0,0,0,.06);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+/* top row inside card */
+.card .top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+}
+.meta{font-size:13px;color:#333}
+.meta b{font-weight:700}
+
+/* status pill (large, colored) */
+.status{
+  font-weight:700;
+  padding:6px 10px;
+  border-radius:8px;
+  display:inline-block;
+  min-width:86px;
+  text-align:center;
+  font-size:15px;
+}
+.status.new{ color:var(--status-new); background:rgba(0,191,255,.06); border:1px solid rgba(0,191,255,.08)}
+.status.work{ color:var(--status-work); background:rgba(255,191,0,.06); border:1px solid rgba(255,191,0,.08)}
+.status.done{ color:var(--status-done); background:rgba(47,193,75,.06); border:1px solid rgba(47,193,75,.08)}
+
+/* thumbs row */
+.thumbs{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:6px;
+}
+.thumb{
+  width:56px;
+  height:40px;
+  border-radius:6px;
+  background:#efefef;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#999;
+  font-size:12px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7);
+}
+
+/* badge for +N */
+.badge{
+  padding:8px 10px;
+  border-radius:8px;
+  background:#f2f2f2;
+  font-weight:700;
+}
+
+/* card actions area */
+.card-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:8px;
+}
+.card-actions select{
+  padding:8px 10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+/* small helpers */
+.btn-apply{background:var(--accent);color:#fff;padding:8px 10px;border-radius:6px;border:none}
+.btn-reset{background:transparent;color:#555;border:1px solid #ddd;padding:8px 10px;border-radius:6px}
+
+/* Empty state */
+.orders > div[style*="Заявок не найдено"]{
+  background:transparent;
+  color:#fff;
+}
+
+/* Account menu basics (if you add an icon/menu) */
+.account-menu{
+  position:absolute;
+  top:calc(100% + 8px);
+  right:0;
+  min-width:180px;
+  background:#0d0d0d;
+  color:#fff;
+  padding:10px;
+  border-radius:8px;
+  box-shadow:0 8px 30px rgba(0,0,0,.4);
+  display:none;
+}
+.account-menu.show{ display:block; }
+
+/* Responsive tweaks */
+@media (max-width:920px){
+  .container{padding:12px}
+  .thumb{width:46px;height:34px}
+  .status{min-width:72px}
+  .filter-form{flex-wrap:wrap;gap:6px}
+}
+@media (max-width:620px){
+  .header-left, .header-right { width:100% }
+  .td-header .container{flex-direction:column; align-items:stretch; gap:10px}
+  .controls{flex-direction:column;align-items:stretch}
+  .filter-form{flex-direction:column;align-items:stretch}
+  .card{padding:10px}
+}
