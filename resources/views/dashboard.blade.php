@@ -4,39 +4,34 @@
 
 @section('content')
 <div class="container">
-  <div class="app-bg"></div>
+  
+  <div class="filter-wrapper">
+    <button type="button" id="filter_btn" class="icon-btn">Фильтр</button>
 
-    <div id="app">
-      <div class="controls" style="display:flex;gap:12px;align-items:center;margin:18px 0">
+    <div id="filter_modal" class="filter-modal">
+      <form method="GET" class="filter-panel">
+        <input name="search" placeholder="Поиск" value="{{ request('search') }}">
 
-            <div class="filter-wrapper">
-        <button type="button" id="filter_btn" class="icon-btn">Фильтр</button>
+        <select name="sort">
+          <option value="newest">От новых к старым</option>
+          <option value="oldest">От старых к новым</option>
+        </select>
 
-        <div id="filter_modal" class="filter-modal">
-          <form method="GET" class="filter-panel">
-            <input name="search" placeholder="Поиск" value="{{ request('search') }}">
+        <input type="date" name="from" value="{{ request('from') }}">
+        <input type="date" name="to" value="{{ request('to') }}">
 
-            <select name="sort">
-              <option value="newest">От новых к старым</option>
-              <option value="oldest">От старых к новым</option>
-            </select>
+        <select name="status">
+          <option value="all">Все</option>
+          <option value="new">Новая</option>
+          <option value="work">В работе</option>
+          <option value="done">Завершена</option>
+        </select>
 
-            <input type="date" name="from" value="{{ request('from') }}">
-            <input type="date" name="to" value="{{ request('to') }}">
-
-            <select name="status">
-              <option value="all">Все</option>
-              <option value="new">Новая</option>
-              <option value="work">В работе</option>
-              <option value="done">Завершена</option>
-            </select>
-
-            <button type="submit" class="add-btn">Применить</button>
-          </form>
-        </div>
-      </div>
-
+        <button type="submit" class="add-btn">Применить</button>
+      </form>
     </div>
+  </div>
+
 
     <div id="orders_list" class="orders">
       @forelse($orders as $o)

@@ -108,18 +108,35 @@ body{
   box-shadow:0 6px 18px rgba(8,167,255,.12);
 }
 
-/* Filter form (inline version in dashboard) */
-.filter-form{
-  display:flex;
-  gap:8px;
-  align-items:center;
+/* filter modal — скрыть по умолчанию */
+.filter-modal {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  display: none;
+  min-width: 320px;
+  background: #0b0b0b;
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
 }
-.filter-form select, .filter-form input[type="date"], .filter-form input[name="search"]{
-  padding:8px 10px;
-  border-radius:6px;
-  border:1px solid #ccc;
-  background:#fff;
+
+.filter-modal.show {
+  display: block;
 }
+
+/* optional: small arrow */
+.filter-modal::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 18px;
+  width: 12px; height: 12px;
+  background: #0b0b0b;
+  transform: rotate(45deg);
+}
+
 
 /* Orders list */
 .orders{
