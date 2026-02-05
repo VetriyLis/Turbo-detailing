@@ -14,7 +14,8 @@ class Order extends Model
         'fio',
         'contact',
         'status',
-        'datetime'
+        'datetime',
+        'car'
     ];
 
     protected $casts = [

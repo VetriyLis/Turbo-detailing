@@ -9,12 +9,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
             $table->string('code')->unique();
             $table->string('fio');
             $table->string('contact');
             $table->enum('status', ['new', 'work', 'done'])->default('new');
             $table->timestamp('datetime');
+            $table->string('car');
             $table->timestamps();
         });
     }

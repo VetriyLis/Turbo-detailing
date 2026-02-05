@@ -10,7 +10,6 @@
 
     <div id="filter_modal" class="filter-modal">
       <form method="GET" class="filter-panel">
-        <input name="search" placeholder="Поиск" value="{{ request('search') }}">
 
         <select name="sort">
           <option value="newest">От новых к старым</option>
@@ -31,6 +30,8 @@
       </form>
     </div>
   </div>
+  <input name="search" placeholder="Поиск" value="{{ request('search') }}">
+
 
 
     <div id="orders_list" class="orders">
@@ -41,6 +42,7 @@
               <div class="meta">Заявка <b>{{ $o->code }}</b> <span style="margin-left:12px">{{ $o->datetime }}</span></div>
               <div class="meta">ФИО: <b>{{ $o->fio }}</b></div>
               <div class="meta">Контакт: <b>{{ $o->contact }}</b></div>
+              <div class="meta">Автомобиль: <b>{{ $o->car }}</b></div>
             </div>
             <div style="text-align:right">
               <div class="status {{ $o->status }}">{{ $o->status === 'new' ? 'Новая' : ($o->status === 'work' ? 'В работе' : 'Завершена') }}</div>
@@ -66,6 +68,7 @@
       <input name="fio" placeholder="ФИО" required>
       <input name="contact" placeholder="Контакт" required>
       <input type="datetime-local" name="datetime" value="{{ now()->format('Y-m-d\\TH:i') }}">
+      <input name="car" placeholder="Автомобиль" required>
       <button type="submit" class="add-btn">Создать</button>
     </form>
 

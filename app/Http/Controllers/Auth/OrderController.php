@@ -17,7 +17,8 @@ class OrderController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->where('fio', 'like', "%{$search}%")
                   ->orWhere('contact', 'like', "%{$search}%")
-                  ->orWhere('code', 'like', "%{$search}%");
+                  ->orWhere('code', 'like', "%{$search}%")
+                  ->orWhere('car', 'like', "%{$search}%");
             });
         }
 
@@ -46,6 +47,7 @@ class OrderController extends Controller
             'fio' => 'required|string',
             'contact' => 'required|string',
             'datetime' => 'required|date',
+            'car' => 'required|string',
         ]);
 
         Order::create($data);

@@ -73,6 +73,11 @@ body{
   color:#111;
 }
 
+.search {
+  padding: 10%;
+}
+
+
 /* Generic icon/button styles */
 .icon-btn{
   display:inline-flex;
