@@ -19,6 +19,8 @@
 </header>
 
 <main>
+  <div class="app-bg">
+  </div>
     @yield('content')
 </main>
 
