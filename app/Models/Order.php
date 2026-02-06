@@ -15,7 +15,8 @@ class Order extends Model
         'contact',
         'status',
         'datetime',
-        'car'
+        'car',
+        'path'
     ];
 
     protected $casts = [

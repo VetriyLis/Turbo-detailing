@@ -4,8 +4,8 @@
 
 @section('content')
 <div class="container">
-  
-  <div class="filter-wrapper">
+  <input name="search" placeholder="Поиск" value="{{ request('search') }}">
+  <div class="filter-wrapper" style="margin-top:10px">
     <button type="button" id="filter_btn" class="icon-btn">Фильтр</button>
 
     <div id="filter_modal" class="filter-modal">
@@ -30,7 +30,7 @@
       </form>
     </div>
   </div>
-  <input name="search" placeholder="Поиск" value="{{ request('search') }}">
+
 
 
 
@@ -43,6 +43,7 @@
               <div class="meta">ФИО: <b>{{ $o->fio }}</b></div>
               <div class="meta">Контакт: <b>{{ $o->contact }}</b></div>
               <div class="meta">Автомобиль: <b>{{ $o->car }}</b></div>
+              <img src="{{ asset('storage/'.$img->path) }}">
             </div>
             <div style="text-align:right">
               <div class="status {{ $o->status }}">{{ $o->status === 'new' ? 'Новая' : ($o->status === 'work' ? 'В работе' : 'Завершена') }}</div>
@@ -62,13 +63,14 @@
       @endforelse
     </div>
 
-    <form id="create_form" method="POST" action="{{ route('orders.store') }}" style="margin-top:18px;display:flex;gap:8px;align-items:center">
+    <form id="create_form" method="POST" enctype="multipart/form-data" action="{{ route('orders.store') }}" style="margin-top:18px;display:flex;gap:8px;align-items:center">
       @csrf
       <input name="code" placeholder="Код заявки (например ZA123)" required>
       <input name="fio" placeholder="ФИО" required>
       <input name="contact" placeholder="Контакт" required>
       <input type="datetime-local" name="datetime" value="{{ now()->format('Y-m-d\\TH:i') }}">
       <input name="car" placeholder="Автомобиль" required>
+      <input type="file" name="images[]" multiple>
       <button type="submit" class="add-btn">Создать</button>
     </form>
 

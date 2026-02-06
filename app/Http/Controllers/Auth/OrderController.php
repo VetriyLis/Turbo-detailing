@@ -48,7 +48,18 @@ class OrderController extends Controller
             'contact' => 'required|string',
             'datetime' => 'required|date',
             'car' => 'required|string',
+            'images.*' => 'image|max:4096'
         ]);
+
+        if ($r->hasFile('images')) {
+        foreach ($r->file('images') as $img) {
+            $path = $img->store('orders', 'public');
+
+            $order->images()->create([
+                'path' => $path
+            ]);
+        }
+        }
 
         Order::create($data);
 
