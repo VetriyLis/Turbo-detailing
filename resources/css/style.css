@@ -128,19 +128,6 @@ body{
   display: block;
 }
 
-/* optional: small arrow */
-.filter-modal::before {
-  content: "";
-  position: absolute;
-  top: -7px;
-  left: 18px;
-  width: 12px; height: 12px;
-  background: #0b0b0b;
-  transform: rotate(45deg);
-  border: solid 1px #00bfff;
-  z-index: -1;
-}
-
 /* Orders list */
 .orders{
   display:flex;
