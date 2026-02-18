@@ -22,4 +22,10 @@ class Order extends Model
     protected $casts = [
         'datetime' => 'datetime',
     ];
+
+    public function images()
+    {
+        return $this->hasMany(\App\Models\OrderImage::class);
+    }
+
 }

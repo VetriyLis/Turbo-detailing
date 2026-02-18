@@ -43,7 +43,14 @@
               <div class="meta">ФИО: <b>{{ $o->fio }}</b></div>
               <div class="meta">Контакт: <b>{{ $o->contact }}</b></div>
               <div class="meta">Автомобиль: <b>{{ $o->car }}</b></div>
-              <img src="{{ asset('storage/'.$img->path) }}">
+              @if($o->images && $o->images->isNotEmpty())
+                <div class="images">
+                  @foreach($o->images as $img)
+                    <img src="{{ asset('storage/'.$img->path) }}" alt="Фото заявки {{ $o->code }}">
+                  @endforeach
+                </div>
+              @endif
+
             </div>
             <div style="text-align:right">
               <div class="status {{ $o->status }}">{{ $o->status === 'new' ? 'Новая' : ($o->status === 'work' ? 'В работе' : 'Завершена') }}</div>

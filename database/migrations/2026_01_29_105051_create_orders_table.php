@@ -16,7 +16,6 @@ return new class extends Migration
             $table->enum('status', ['new', 'work', 'done'])->default('new');
             $table->timestamp('datetime');
             $table->string('car');
-            $table->string('path');
             $table->timestamps();
         });
     }

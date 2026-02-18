@@ -252,3 +252,18 @@ body{
   .filter-form{flex-direction:column;align-items:stretch}
   .card{padding:10px}
 }
+
+.images {
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+  align-items:center;
+}
+.images img {
+  width:72px;
+  height:56px;
+  object-fit:cover;
+  border-radius:6px;
+  border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 4px 12px rgba(0,0,0,.12);
+}

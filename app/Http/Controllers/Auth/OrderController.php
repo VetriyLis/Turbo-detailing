@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-
-    // GET /  (dashboard)
+        // GET /  (dashboard)
     public function index(Request $request)
     {
         $query = Order::query();
@@ -34,10 +33,17 @@ class OrderController extends Controller
             if ($status !== 'all') $query->where('status', $status);
         }
 
-        $orders = $query->orderBy('datetime', $sort)->get();
+        $orders = $query->with('images')->orderBy('datetime', $sort)->get();
 
         return view('dashboard', compact('orders'));
     }
+
+    public function images()
+    {
+        return $this->hasMany(OrderImage::class);
+    }
+
+
 
     // POST /orders  (создание заявки)
     public function store(Request $r)
@@ -48,20 +54,32 @@ class OrderController extends Controller
             'contact' => 'required|string',
             'datetime' => 'required|date',
             'car' => 'required|string',
-            'images.*' => 'image|max:4096'
+            'images.*' => 'image|max:4096' // опционально: проверяем каждый файл
         ]);
 
+        // 1) Сначала создаём заказ (без ключа 'images')
+        $orderData = $data;
+        // на всякий случай убираем images ключ, если он попал в $data
+        if (isset($orderData['images'])) {
+            unset($orderData['images']);
+        }
+
+        $order = Order::create($orderData);
+
+        // 2) Затем сохраняем файлы (если они были загружены) и привязываем к только-что созданному заказу
         if ($r->hasFile('images')) {
-        foreach ($r->file('images') as $img) {
-            $path = $img->store('orders', 'public');
+            foreach ($r->file('images') as $img) {
+                if (!$img->isValid()) continue;
 
-            $order->images()->create([
-                'path' => $path
-            ]);
-        }
-        }
+                // сохраняем в storage/app/public/orders
+                $path = $img->store('orders', 'public');
 
-        Order::create($data);
+                // предполагается, что у модели Order есть relation images() -> hasMany(OrderImage::class)
+                $order->images()->create([
+                    'path' => $path
+                ]);
+            }
+        }
 
         return back();
     }
