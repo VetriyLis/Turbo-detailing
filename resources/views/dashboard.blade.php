@@ -93,7 +93,8 @@
         <div style="color:#666;padding:16px">Заявок не найдено</div>
       @endforelse
     </div>
-
+    
+    <h1>ФУНКЦИЯ ДЛЯ ТЕСТИРОВАНИЯ</h1>
     <form id="create_form" method="POST" enctype="multipart/form-data" action="{{ route('orders.store') }}" style="margin-top:18px;display:flex;gap:8px;align-items:center">
       @csrf
       <input name="code" placeholder="Код заявки (например ZA123)" required>

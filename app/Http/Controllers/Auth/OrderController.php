@@ -50,7 +50,7 @@ class OrderController extends Controller
             'datetime' => 'required|date',
             'car' => 'required|string',
             'images' => 'nullable|array',
-            'images.*' => 'image' // макс 5MB на файл (пример)
+            'images.*' => 'image'
         ]);
 
         $orderData = $data;
