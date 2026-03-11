@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Auth\Controller;
 use App\Models\Order;
+use App\Models\OrderImage;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-        // GET /  (dashboard)
+    // GET /  (dashboard)
     public function index(Request $request)
     {
         $query = Order::query();
@@ -38,13 +40,6 @@ class OrderController extends Controller
         return view('dashboard', compact('orders'));
     }
 
-    public function images()
-    {
-        return $this->hasMany(OrderImage::class);
-    }
-
-
-
     // POST /orders  (создание заявки)
     public function store(Request $r)
     {
@@ -54,30 +49,26 @@ class OrderController extends Controller
             'contact' => 'required|string',
             'datetime' => 'required|date',
             'car' => 'required|string',
-            'images.*' => 'image|max:4096' // опционально: проверяем каждый файл
+            'images' => 'nullable|array',
+            'images.*' => 'image' // макс 5MB на файл (пример)
         ]);
 
-        // 1) Сначала создаём заказ (без ключа 'images')
         $orderData = $data;
-        // на всякий случай убираем images ключ, если он попал в $data
         if (isset($orderData['images'])) {
             unset($orderData['images']);
         }
 
         $order = Order::create($orderData);
 
-        // 2) Затем сохраняем файлы (если они были загружены) и привязываем к только-что созданному заказу
         if ($r->hasFile('images')) {
-            foreach ($r->file('images') as $img) {
-                if (!$img->isValid()) continue;
-
-                // сохраняем в storage/app/public/orders
-                $path = $img->store('orders', 'public');
-
-                // предполагается, что у модели Order есть relation images() -> hasMany(OrderImage::class)
-                $order->images()->create([
-                    'path' => $path
-                ]);
+            $files = $r->file('images');
+            if (!is_array($files)) {
+                $files = [$files];
+            }
+            foreach ($files as $img) {
+                if (!$img || !$img->isValid()) continue;
+                $path = $img->store('orders', 'public'); // сохранит в storage/app/public/orders
+                $order->images()->create(['path' => $path]);
             }
         }
 

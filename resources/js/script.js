@@ -39,3 +39,43 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+// ===== gallery modal (open on thumb or +N, close on overlay / close btn / Esc) =====
+document.addEventListener('click', function (e) {
+  // открыть модалку при клике на .thumb (включая .more)
+  const thumb = e.target.closest('.thumb');
+  if (thumb && thumb.dataset && thumb.dataset.orderId) {
+    const id = thumb.dataset.orderId;
+    const modal = document.getElementById('modal-' + id);
+    if (modal) {
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+    }
+    return;
+  }
+
+  // закрыть по элементам с data-close (overlay и close button)
+  if (e.target.matches('[data-close]') || e.target.closest('[data-close]')) {
+    const modal = e.target.closest('.gallery-modal');
+    if (modal) {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+    } else {
+      // если клик на overlay элемент
+      document.querySelectorAll('.gallery-modal.show').forEach(m=>{
+        m.classList.remove('show');
+        m.setAttribute('aria-hidden','true');
+      });
+    }
+  }
+});
+
+// закрыть при нажатии Esc
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.gallery-modal.show').forEach(m=>{
+      m.classList.remove('show');
+      m.setAttribute('aria-hidden','true');
+    });
+  }
+});

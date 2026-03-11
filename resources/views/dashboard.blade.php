@@ -31,9 +31,6 @@
     </div>
   </div>
 
-
-
-
     <div id="orders_list" class="orders">
       @forelse($orders as $o)
         <div class="card" data-id="{{ $o->id }}">
@@ -44,13 +41,42 @@
               <div class="meta">Контакт: <b>{{ $o->contact }}</b></div>
               <div class="meta">Автомобиль: <b>{{ $o->car }}</b></div>
               @if($o->images && $o->images->isNotEmpty())
-                <div class="images">
-                  @foreach($o->images as $img)
-                    <img src="{{ asset('storage/'.$img->path) }}" alt="Фото заявки {{ $o->code }}">
+                @php
+                  $shown = $o->images->take(3);
+                  $extra = $o->images->count() - $shown->count();
+                @endphp
+
+                <div class="images" data-order-id="{{ $o->id }}">
+                  @foreach($shown as $img)
+                    <div class="thumb" data-order-id="{{ $o->id }}">
+                      <img class="thumb-img" src="{{ asset('public/storage/'.$img->path) }}" alt="Фото заявки {{ $o->code }}">
+                    </div>
                   @endforeach
+
+                  @if($extra > 0)
+                    <div class="thumb more" data-order-id="{{ $o->id }}" aria-label="Показать все фото">
+                      <div class="badge">+{{ $extra }}</div>
+                    </div>
+                  @endif
+                </div>
+
+                <!-- gallery modal для этого заказа -->
+                <div class="gallery-modal" id="modal-{{ $o->id }}" aria-hidden="true">
+                  <div class="gallery-modal__overlay" data-close>
+                    <div class="gallery-modal__content" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
+                      <button class="gallery-modal__close" data-close aria-label="Закрыть">&times;</button>
+
+                      <div class="gallery-grid">
+                        @foreach($o->images as $img)
+                          <a href="{{ asset('public/storage/'.$img->path) }}" target="_blank" rel="noopener">
+                            <img src="{{ asset('public/storage/'.$img->path) }}" alt="Фото заявки {{ $o->code }}">
+                          </a>
+                        @endforeach
+                      </div>
+                    </div>
+                  </div>
                 </div>
               @endif
-
             </div>
             <div style="text-align:right">
               <div class="status {{ $o->status }}">{{ $o->status === 'new' ? 'Новая' : ($o->status === 'work' ? 'В работе' : 'Завершена') }}</div>

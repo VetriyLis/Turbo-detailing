@@ -223,20 +223,6 @@ body{
   color:#fff;
 }
 
-/* Account menu basics (if you add an icon/menu) */
-.account-menu{
-  position:absolute;
-  top:calc(100% + 8px);
-  right:0;
-  min-width:180px;
-  background:#0d0d0d;
-  color:#fff;
-  padding:10px;
-  border-radius:8px;
-  box-shadow:0 8px 30px rgba(0,0,0,.4);
-  display:none;
-}
-.account-menu.show{ display:block; }
 
 /* Responsive tweaks */
 @media (max-width:920px){
@@ -260,10 +246,43 @@ body{
   align-items:center;
 }
 .images img {
-  width:72px;
-  height:56px;
+  width:260px;
+  height:150px;
   object-fit:cover;
   border-radius:6px;
   border:1px solid rgba(0,0,0,.06);
   box-shadow:0 4px 12px rgba(0,0,0,.12);
+}
+
+/* маленькие миниатюры в карточках + +N бейдж */
+.images { display:flex; gap:8px; margin-top:8px; align-items:center; }
+.images .thumb { width:56px; height:40px; border-radius:6px; overflow:hidden; background:#efefef; display:flex; align-items:center; justify-content:center; }
+.images .thumb .thumb-img { width:100%; height:100%; object-fit:cover; display:block; }
+.images .thumb .badge { font-weight:700; font-size:13px; color:#555; }
+
+/* gallery modal & thumbs overrides */
+.images { display:flex; gap:8px; margin-top:8px; align-items:center; }
+.images .thumb { width:56px; height:40px; border-radius:6px; overflow:hidden; background:#efefef; display:flex; align-items:center; justify-content:center; cursor:pointer; border:1px solid rgba(0,0,0,.04); }
+.images .thumb .thumb-img { width:100%; height:100%; object-fit:cover; display:block; }
+.images .thumb.more { display:flex; align-items:center; justify-content:center; font-weight:700; color:#444; background:#f6f6f6; }
+.images .thumb .badge { font-weight:700; font-size:13px; color:#333; }
+
+/* modal */
+.gallery-modal { display:none; position:fixed; inset:0; align-items:center; justify-content:center; background:rgba(0,0,0,0.65); z-index:9999; padding:20px; }
+.gallery-modal.show { display:flex; }
+
+.gallery-modal__overlay { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+.gallery-modal__content { position:relative; background:#fff; padding:16px; border-radius:8px; max-width:1100px; width:100%; max-height:90vh; overflow:auto; box-shadow:0 10px 40px rgba(0,0,0,.6); }
+
+/* close button */
+.gallery-modal__close { position:absolute; right:12px; top:8px; background:transparent; border:none; font-size:28px; line-height:1; cursor:pointer; color:#333; }
+
+/* grid inside modal */
+.gallery-grid { display:grid; gap:8px; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); margin-top:6px; }
+.gallery-grid img { width:100%; height:160px; object-fit:cover; border-radius:6px; display:block; }
+
+/* responsive tweaks */
+@media (max-width:620px){
+  .gallery-grid img { height:120px; }
+  .gallery-modal__content{ padding:12px; }
 }

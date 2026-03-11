@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>@yield('title','Turbo Detailing')</title>
+    <title>@yield('title','Turbo Detailing Dev')</title>
     <link rel="stylesheet" href="{{ asset('resources/css/style.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -11,7 +11,7 @@
 <header class="td-header">
   <div class="container">
     <div class="td-left">
-      <a href="{{ route('dashboard') }}" class="logo">Turbo Detailing</a>
+      <a href="{{ route('dashboard') }}" class="logo">Turbo Detailing Dev</a>
     </div>
     <div class="td-right">
     </div>
