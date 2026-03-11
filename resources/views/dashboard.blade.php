@@ -64,8 +64,6 @@
                 <div class="gallery-modal" id="modal-{{ $o->id }}" aria-hidden="true">
                   <div class="gallery-modal__overlay" data-close>
                     <div class="gallery-modal__content" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
-                      <button class="gallery-modal__close" data-close aria-label="Закрыть">&times;</button>
-
                       <div class="gallery-grid">
                         @foreach($o->images as $img)
                           <a href="{{ asset('public/storage/'.$img->path) }}" target="_blank" rel="noopener">
