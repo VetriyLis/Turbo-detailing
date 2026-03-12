@@ -112,7 +112,7 @@ body{
 /* filter modal — скрыть по умолчанию */
 .filter-modal {
   position: absolute;
-  top: 22.5%;
+  top: 17.5%;
   left: 22%;
   display: none;
   min-width: 320px;
@@ -146,6 +146,10 @@ body{
   display:flex;
   flex-direction:column;
   gap:8px;
+}
+
+.icon-btn{
+  margin-bottom: 10px;
 }
 
 /* top row inside card */

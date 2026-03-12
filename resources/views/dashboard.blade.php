@@ -2,31 +2,34 @@
 
 @section('title','Панель — Turbo Detailing')
 
-@section('content')
+@section('content')  
+
 <div class="container">
-  <input name="search" placeholder="Поиск" value="{{ request('search') }}">
+
   <div class="filter-wrapper" style="margin-top:10px">
     <button type="button" id="filter_btn" class="icon-btn">Фильтр</button>
 
-    <div id="filter_modal" class="filter-modal">
-      <form method="GET" class="filter-panel">
+    <form method="GET">
+      <input name="search" placeholder="Поиск" value="{{ request('search') }}">
+      <div id="filter_modal" class="filter-modal">
+        <div class="filter-panel">
+          
+          <select name="sort">
+            <option value="newest">От новых к старым</option>
+            <option value="oldest">От старых к новым</option>
+          </select>
 
-        <select name="sort">
-          <option value="newest">От новых к старым</option>
-          <option value="oldest">От старых к новым</option>
-        </select>
+          <input type="date" name="from" value="{{ request('from') }}">
+          <input type="date" name="to" value="{{ request('to') }}">
 
-        <input type="date" name="from" value="{{ request('from') }}">
-        <input type="date" name="to" value="{{ request('to') }}">
+          <select name="status">
+            <option value="all">Все</option>
+            <option value="new">Новая</option>
+            <option value="work">В работе</option>
+            <option value="done">Завершена</option>
+          </select>
 
-        <select name="status">
-          <option value="all">Все</option>
-          <option value="new">Новая</option>
-          <option value="work">В работе</option>
-          <option value="done">Завершена</option>
-        </select>
-
-        <button type="submit" class="add-btn">Применить</button>
+          <button type="submit" class="add-btn">Применить</button>
       </form>
     </div>
   </div>
@@ -94,7 +97,7 @@
       @endforelse
     </div>
     
-    <h1>ФУНКЦИЯ ДЛЯ ТЕСТИРОВАНИЯ</h1>
+    <h1 style="color: white">ФУНКЦИЯ ДЛЯ ТЕСТИРОВАНИЯ</h1>
     <form id="create_form" method="POST" enctype="multipart/form-data" action="{{ route('orders.store') }}" style="margin-top:18px;display:flex;gap:8px;align-items:center">
       @csrf
       <input name="code" placeholder="Код заявки (например ZA123)" required>
